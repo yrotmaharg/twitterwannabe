@@ -2,7 +2,7 @@ require 'sinatra'
 require 'haml'
 require 'sinatra/activerecord'
 
-set :database, "sqlite3:///twitterclone.sqlite3"
+configure( :development) {set :database, "sqlite3:///twitterclone.sqlite3"}
 
 require 'bundler/setup'
 require 'sinatra/base'
