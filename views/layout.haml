@@ -1,0 +1,19 @@
+!!!
+%html
+	%head
+		%title Twitter Wannabe
+		%link{href: "/twitter.css", rel: "stylesheet", type: "text/css"}
+	%body
+		.tweet
+
+
+		-if flash[:notice]
+			=flash[:notice]
+		-if flash[:alert]
+			=flash[:alert]
+
+// - tells haml you're about to excute ruby code, but not output it and = is both.
+
+
+
+			=yield

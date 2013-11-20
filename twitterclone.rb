@@ -2,7 +2,8 @@ require 'sinatra'
 require 'haml'
 require 'sinatra/activerecord'
 
-configure( :development) {set :database, "sqlite3:///twitterclone.sqlite3"}
+configure(:development){ set :database, "sqlite3:///twitterclone.sqlite3" }
+#set is a method,so don't forget a space (or parenthesis)
 
 require 'bundler/setup'
 require 'sinatra/base'
@@ -12,7 +13,7 @@ require 'rake'
 require './models'
 
 
-
+#stuff you need for the flash
 enable :sessions
 use Rack::Flash, :sweep => true
 set :sessions => true
@@ -52,6 +53,14 @@ post '/some_form_submit_route' do
 end
 
 post '/signup' do
+	@user = User.new(params['user'])
+	if @user.save
+		flash[:notice] = "You have signed up successfully"
+		redirect '/'
+	else
+		 flash[:alert] = "There was a problem with that."
+		 redirect '/signup'
+
   #some code here to process any incoming params
 end
 
