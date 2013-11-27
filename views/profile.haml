@@ -1,0 +1,24 @@
+-if @user
+	%h1
+		=@user.full_name
+	%h3
+		=@user.email
+// remember anything belonging to a tag needs to be indented.
+	.tweet
+	-@user.tweets.each do |tweet|
+		=tweet.text
+		%br
+		=tweet.user.fname
+		%br
+		=tweet.created_at.strftime #foragoodstrftime.com gives you the code to make the time sexy
+		%br
+		%br
+	%br
+	%br
+
+
+-if @user == current_user
+	%form{action: '/tweet/new', method: POST}
+		%label{for: 'tweet'} Write a new tweet.
+		%textarea{name: 'text'}
+		%input{type: 'submit', value: 'create your tweet'}

@@ -25,6 +25,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     builder (3.1.4)
     haml (4.0.4)
       tilt
@@ -54,6 +55,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  bcrypt-ruby
   haml
   pg
   rack-flash3!

@@ -9,6 +9,8 @@ class CreateUser < ActiveRecord::Migration
           t.string :city
           t.string :state
           t.datetime :created_at
+          t.string :password_salt
+          t.string :password_hash
   	end
   end
 

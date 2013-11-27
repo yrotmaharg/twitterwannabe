@@ -11,7 +11,7 @@ gem 'rake'
 
 gem 'rack-flash3', :git => "git://github.com/treeder/rack-flash.git"
 #we're using the git here, because we want a different version.
-
+gem 'bcrypt-ruby'
 
 group :development do
 	gem 'sqlite3'

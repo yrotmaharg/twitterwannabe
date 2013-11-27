@@ -1,0 +1,20 @@
+%h1
+	Welcome to Twitter &copy;
+	=current_user.full_name if current_user
+
+-@users.each do |user|
+	%a{href: "/users/#{user.id}"} = user.full_name
+	%br
+// I don't understand this part and just copied. I understand the route '/users/:id' but how do I know to use #{}? Where did this come from and what does it mean? I can just stick it in the route?
+		
+
+-@tweets.each do |tweet|
+	 =tweet.text
+	 %br
+	 =tweet.user.full_name
+	 %br
+	 =tweet.created_at.strftime('%D') 
+	 %br
+	 %br
+
+

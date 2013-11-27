@@ -1,36 +1,4 @@
 
-.realname {
-	color: #333333;
-}
-
-.username {
-	color: grey;
-	font-weight:bold;
-}
-
-.maintext {
-	font-size:18px;
-}
-
-.mention {
-	font-weight: bold;
-}
-
-.date {
-	color: grey;
-}
-
-a:link	{
-	color:#008AB9
-}
-
-p {
-	font-family: Arial;
-	margin: 5px;
-}
-
-
-
 .tweet {
 	width: 430px;
 	padding: 10px;
@@ -38,6 +6,6 @@ p {
 
 }
 
-img {
-	width: 430px;
+body {
+	background-color: #E0FFFF;
 }

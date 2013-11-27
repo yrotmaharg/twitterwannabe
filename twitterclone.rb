@@ -8,6 +8,7 @@ configure(:development){ set :database, "sqlite3:///twitterclone.sqlite3" }
 require 'bundler/setup'
 require 'sinatra/base'
 require 'rack-flash'
+require 'bcrypt'
 require 'rake'
 
 require './models'
@@ -24,11 +25,26 @@ helpers do
   def current_user
     session[:user_id].nil? ? nil : User.find(session[:user_id])
     # this means that during this session, if the user gives back nothing, (it's not the user) then display nothing. If it's the user, then display the
+  #you could also code this like this:
+  #if session[:user_id]
+    #User.find(session[:user_id])
+    #else 
+    #nil
+    #end
   end
   def display_one
     "1"
   end
 end
+
+
+get '/' do
+  @users = User.all
+  @tweets = Tweet.all
+  haml :home
+end
+
+#why do these get defined here? in the home route?
 
 
 get '/tweet' do
@@ -44,24 +60,29 @@ get '/signin' do
 end
 
 
-get '/' do
-  haml :homepage
-end
+
 
 post '/some_form_submit_route' do
   flash[:alert] = "There was a problem with that."
 end
 
+
+
 post '/signup' do
+  #some code here to process any incoming params
 	@user = User.new(params['user'])
 	if @user.save
 		flash[:notice] = "You have signed up successfully"
 		redirect '/'
 	else
-		 flash[:alert] = "There was a problem with that."
+		 flash[:alert] = "Oh oh. That didn't work. Try again."
 		 redirect '/signup'
+  end
+end
 
-  #some code here to process any incoming params
+get '/users/:id' do
+  @user = User.find(params[:id])
+  haml :profile
 end
 
 post '/signin' do
@@ -71,12 +92,36 @@ post '/signin' do
 	#possibly authenticate
 	#if a user was found and authenticated, show a flash notice that
 	#they were logged in successfuly. then redirect them to the homepage.
+  @user = User.authenticate(params['user']['email'], params['user']['password'])
+
   	if @user
-  		flash[:notice] = 'Welcome to the homepage'
+      session[:user_id] = @user.id
+  		flash[:notice] = 'Welcome!'
   		redirect '/'
   	else
-  		flash[:alert] = "Uhoh"
+  		flash[:alert] = "Ooops! That didn't work."
   		redirect '/signin'
   	end
   #some code here to process any incoming params
 end
+
+get '/sign_out' do
+  session[:user_id] = nil
+  flash[:notice] = "You've been successfully signed out."
+  redirect '/'
+end
+
+post '/tweet/new' do
+  if current_user
+    @tweet = Tweet.new(text: params['text'], created_at: Time.now, user_id: current_user.id)
+    if @tweet.save
+      flash[:notice] = "YAY"
+    else
+    flash[:alert] = "Ooops"
+    end
+    redirect "/users/#{current_user.id}"
+  end
+end
+
+
+

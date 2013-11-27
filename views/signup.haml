@@ -1,14 +1,24 @@
-!!!
+%h1 Register with Twitter Wannabe
 
 %form{action: "/signup", method: "POST"}
   %label{for: 'fname'} First name
-  %input{type: "text", name: "[user]first_name"}
+  %input{type: "text", name: "[user]fname"}
   %label{for: 'lname'} Last name
-  %input{type: "text", name: "[user]last_name"}
-  %label {for: 'email'} Email
+  %input{type: "text", name: "[user]lname"}
+  %label{for: 'city'} City
+  %input{type: "text", name: "[user]city"}
+  %label{for: 'state'} State
+  %input{type: "text", name: "[user]state"}
+  %label{for: 'bio_info'} Bio
+  %input{type: "text", name: "[user]bio_info"}
+  %label{for: 'email'} Email
   %input{type: "text", name: "[user]email"}
-  %label {for: 'password'} Password
+  %label{for: 'password'} Password
   %input{type: "password", name: "[user]password"}
   %input{type: "submit", value: "submit"}
 
-//should be the name of the columns in table
+//Note to self: "for" should be the name of the columns in table
+//Question for Zach: What is "name" in this case, that every input is called "name?" i.e. why aren't different words used? 
+
+
+    
